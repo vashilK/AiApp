@@ -1,0 +1,1774 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>English Ai Companion</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <!-- ICON PACK -->
+  <link rel="stylesheet" href="dist/jqm-icon-pack-fa-builder.css">
+  <link rel="stylesheet" href="dist/jqm-icon-pack-fa.css">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600,800,900" rel="stylesheet" type="text/css">
+  <!-- jQuery -->
+  <link rel="stylesheet" type="text/css" href="js/jquery.mobile-1.4.5.css">
+  <script src="js/jquery.js"></script>
+  <script src="js/jquery.mobile-1.4.5.js"></script>
+  <script src="cordova.js"></script>
+  <!-- MATERIAL DESIGN -->
+  <link rel="stylesheet" href="css/material.min.css">
+  <script src="js/material.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <!-- jQuery UI
+  <link rel="stylesheet" href="jquery-ui/jquery-ui.css">
+  <script src="jquery-ui/jquery-ui.js"></script>
+-->
+  <!-- progress bar -->
+  <script src="js/progressbar.js"></script>
+  <!-- Ai Neural Network -->
+  <script src="js/brain-0.6.3.js"></script>
+  <!-- CUSTOM JS
+  <script src="js/customanimation.js"></script> -->
+  <!-- CUSTOM CSS -->
+  <link rel="stylesheet" href="css/khome.css">
+  <link rel="stylesheet" href="css/boyfeedback.css">
+  <style>
+    .botnav {
+      text-align: center;
+      align-items: baseline;
+      height: 7px;
+    }
+
+    /**Sticks the footer to the bottom of the page */
+    [data-role=page] {
+      height: 100% !important;
+      position: relative !important;
+    }
+
+    [data-role=footer] {
+      bottom: 0;
+      position: absolute !important;
+      top: auto !important;
+      width: 100%;
+    }
+
+    /*LOGIN*/
+    #Klogin {
+      background: linear-gradient(to bottom, #0033cc 0%, #9999ff 100%);
+      width: inherit;
+      text-align: center;
+      height: 100%;
+    }
+
+    #Klogo {
+      margin-top: 150px;
+    }
+
+    #Kcontainter {
+      margin-top: 40px;
+      margin-left: 80px;
+      width: 280px;
+      height: 400px;
+      text-align: center;
+    }
+
+    #klarge {
+      color: black;
+    }
+
+    #klarge1 {
+      color: black;
+    }
+
+    #Kshowboy {
+      position: relative;
+      top: 34px;
+      left: 135px;
+      width: 10%;
+    }
+
+    #Kshowkey {
+      position: relative;
+      top: 68px;
+      left: 106px;
+      width: 9%;
+    }
+
+    /*APTITUDE TEST*/
+    #aptitudetest {
+      background: linear-gradient(to bottom left, #ffff99 0%, #ffcc99 100%);
+    }
+
+    #logoaptitude {
+      width: inherit;
+      text-align: center;
+    }
+
+    #iambrain {
+      margin-top: 220px;
+      width: 30%;
+    }
+
+    #apti {
+      margin-top: 30px;
+      display: none;
+    }
+
+    .apttext {
+      font-style: normal;
+      font-size: 18px;
+    }
+
+    #aptsub {
+      width: 30%;
+    }
+
+    /*QUESTIONS FOR PRETEST*/
+    @font-face {
+      font-family: "Ams";
+      src: url("css/fonts/Alex.ttf");
+    }
+
+    #pretest {
+      width: inherit;
+      height: 100%;
+      background: linear-gradient(to left, #99ccff 0%, #3366ff 100%);
+    }
+
+    #Q1,
+    #Q2,
+    #Q3,
+    #Q4,
+    #Q5,
+    #Q6,
+    #Q7,
+    #Q8,
+    #Q9,
+    #Q10 {
+      height: 100%;
+      width: inherit;
+      margin-top: 150px;
+    }
+
+    #Q2,
+    #Q3,
+    #Q4,
+    #Q5,
+    #Q6,
+    #Q7,
+    #Q8,
+    #Q9,
+    #Q10 {
+      display: none;
+    }
+
+    .questionfont {
+      font-family: 'Ams';
+      color: white;
+      font-size: 34px;
+    }
+
+    /*pretest results */
+    @font-face {
+      font-family: "Lemon";
+      src: url("css/fonts/Lemon.ttf");
+    }
+
+    #pretestresults {
+      align-items: center;
+      text-align: center;
+      background: linear-gradient(to top, #99ccff -15%, #ffcccc 100%);
+    }
+
+    .results {
+      font-family: 'Lemon';
+      font-size: 40px;
+    }
+
+    #pretestcontainer {
+      position: absolute;
+      top: 180px;
+      left: 55px;
+      width: 300px;
+      height: 300px;
+    }
+
+    #movetomain {
+      position: absolute;
+      width: 30%;
+      height: 40px;
+      top: 510px;
+      left: 140px;
+      background-color: #BBBBE7;
+      border: none;
+      color: white;
+      font-weight: lighter;
+    }
+
+    /*Homepage CSS*/
+    /*UI HOMEPAGE*/
+    .demo-card-square.mdl-card {
+      width: 240px;
+      height: 180px;
+    }
+
+    #K1.demo-card-square>.mdl-card__title {
+      color: #fff;
+      background:
+        url('img/bookshelf.png') bottom right 15% no-repeat #BA68C8;
+    }
+
+    #K2.demo-card-square>.mdl-card__title {
+      color: #fff;
+      background:
+        url('img/dossier.png') bottom right 15% no-repeat #4DB6AC;
+    }
+
+    #K3.demo-card-square>.mdl-card__title {
+      color: #fff;
+      background:
+        url('img/blog.png') bottom right 15% no-repeat #EC407A;
+    }
+
+    #K4.demo-card-square>.mdl-card__title {
+      color: #fff;
+      background:
+        url('img/res.png') bottom right 15% no-repeat #98A2DD;
+    }
+
+    #K5.demo-card-square>.mdl-card__title {
+      color: #fff;
+      background:
+        url('img/ranking.png') bottom right 15% no-repeat #B43C4E;
+    }
+
+    .kblue {
+      align-items: center;
+      text-align: center;
+      position: relative;
+      padding-top: 22px;
+      padding-left: 80px;
+    }
+
+    #Kred,
+    #Kred1,
+    #Kred2 {
+      align-items: center;
+      text-align: center;
+      position: relative;
+      padding-top: 22px;
+      padding-left: 80px;
+    }
+
+    #learnAlign {
+      text-align: center;
+    }
+
+    #Kred1,
+    #Kred2,
+    #K4 {
+      display: none;
+    }
+
+    /*Profile CSS*/
+    /*PROFILE CSS*/
+    #Kprofilemain {
+      width: inherit;
+    }
+
+    #Kprofileicon {
+      position: relative;
+      top: 10px;
+      align-items: baseline;
+      text-align: center;
+
+    }
+
+    #Klogout {
+      left: 400px;
+    }
+
+    h9 {
+      position: relative;
+      top: -20px;
+      font-weight: lighter;
+    }
+
+    .Ktitl {
+      font-size: 14px;
+      font-weight: lighter;
+      color: hsl(0, 0%, 50%);
+    }
+
+    #Ktitl1 {
+      text-align: left;
+    }
+
+    #Ktitl2 {
+      text-align: left;
+      margin-left: 220px;
+    }
+
+    #Khrs {
+      position: relative;
+      top: 20px;
+      left: -280px;
+    }
+
+    #Klevel {
+      position: relative;
+      top: 20px;
+      left: -45px;
+    }
+
+    #Kproseparator {
+      width: 470px;
+      position: relative;
+      top: 38px;
+      height: 2px;
+      background-color: grey;
+    }
+
+    #Kachievements {
+      position: relative;
+      top: 40px;
+      width: inherit;
+      height: 300px;
+      padding-top: 20px;
+    }
+
+    .ui-grid-c {
+      position: relative;
+      padding-top: 10px;
+      left: 20px;
+    }
+
+    /*KMENU CSS*/
+    h4 {
+      font-weight: 100;
+    }
+
+    #Kmenu {
+      background: #fafafa;
+    }
+
+    #Kmenucont {
+      width: inherit;
+      height: 60px;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    #Kset {
+      position: relative;
+      top: -45px;
+      left: 410px;
+    }
+
+    #Kprogresscont {
+      margin-top: -10px;
+      width: inherit;
+      height: 300px;
+      text-align: left;
+      border-width: medium;
+      border-top-color: black;
+    }
+
+    h7 {
+      font-weight: lighter;
+      position: relative;
+      top: 20px;
+      left: 20px;
+    }
+
+    h8 {
+      font-weight: lighter;
+      position: relative;
+      top: 20px;
+      left: 280px;
+    }
+
+    /* percentage bars*/
+    #container,
+    #container1,
+    #container2,
+    #container3,
+    #container4,
+    #container5 {
+      margin: 20px;
+      margin-bottom: 0;
+      width: 400px;
+      height: 8px;
+    }
+
+    #Kseparator {
+      width: inherit;
+      margin-top: -180px;
+      height: 2px;
+      background-color: grey;
+    }
+
+    #Krankingcont {
+      width: inherit;
+      height: 300px;
+      text-align: center;
+      border-width: medium;
+      border-top-color: black;
+      position: relative;
+      top: -10px;
+    }
+
+    #Krank {
+      position: relative;
+      top: -45px;
+      left: 410px;
+    }
+
+    #Kpodium {
+      width: inherit;
+      height: 100%;
+    }
+
+    @font-face {
+      font-family: "BT";
+      src: url("css/fonts/Skar.ttf");
+    }
+
+    .overallperformance {
+      font-size: 80px;
+      text-align: center;
+      font-family: 'BT';
+      margin-left: 120px;
+    }
+
+    /*BOY CSS*/
+    .boyquestion {
+      background: linear-gradient(to top right, #0066cc 0%, #66ccff 100%);
+    }
+
+    .plus {
+      width: 50%;
+      position: absolute;
+      top: 260px;
+      left: 90px;
+    }
+
+    .gscore {
+      font-size: 20px;
+    }
+
+    /*EXPLANATION VERB BOY*/
+    .topic {
+      font-family: 'BT';
+      font-size: 34px;
+      color: white;
+    }
+
+    .white {
+      color: white;
+      font-weight: lighter;
+    }
+
+    .sm {
+      width: 40%;
+    }
+
+    .questions {
+      font-family: 'Lemon';
+      font-size: 40px;
+    }
+
+    .op {
+      width: 80%;
+    }
+
+    .qw {
+      text-align: left;
+      color: white;
+      font-size: 24px;
+    }
+
+    .leveleasy {
+      bottom: 0;
+      position: absolute !important;
+      top: auto !important;
+      width: 100%;
+      height: 10px;
+      background-color: green;
+    }
+
+    .levelmed {
+      bottom: 0;
+      position: absolute !important;
+      top: auto !important;
+      width: 100%;
+      height: 10px;
+      background-color: orange;
+    }
+
+    .levelhard {
+      bottom: 0;
+      position: absolute !important;
+      top: auto !important;
+      width: 100%;
+      height: 10px;
+      background-color: red;
+
+    }
+
+    .iamfeedback {
+      font-weight: lighter;
+      color: white;
+      font-size: 24px;
+    }
+
+    @font-face {
+      font-family: 'BT1';
+      src: url("css/fonts/AlexBrush.ttf");
+    }
+
+    .FR {
+      font-size: 50px;
+      font-family: 'BT1';
+    }
+
+    #clicks {
+      font-size: 24px;
+    }
+
+    #qpattern {
+      font-size: 20px;
+    }
+  </style>
+
+<body>
+
+  <!-- LOGIN PAGE -->
+  <div data-role="page" id="Klogin">
+    <div data-role="main" class="ui-content">
+      <img src="img/logo.png" id="Klogo">
+      <div id="Kcontainter">
+        <img src="img/boy.png" id="Kshowboy">
+        <img src="img/key.png" id="Kshowkey">
+        <input id="klarge" type="text">
+        <input id="klarge1" type="password">
+        <button id="Kloginbtn" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+          LOGIN
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Verb Explanation -->
+  <div data-role="page" id="V1" class="boyquestion">
+    <div data-role="main" class="ui-content">
+      <div class="qs">
+        <img src="img/soccerball.png">
+        <span class="gscore">0000</span>
+      </div>
+      <br><br>
+      <span class="topic">Verb(Present Tense)</span>
+      <br><br><br>
+      <span class="white">Simple Present: He reads.</span>
+      <br><br>
+      <img src="img/manreads.gif" class="sm">
+      <br><br>
+      <span class="white">Simple Present: He moves.</span>
+      <br><br>
+      <img src="img/moves.gif">
+      <br><br>
+      <a href="#V2"><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored ansbtn">
+          CONTINUE
+        </button></a>
+    </div>
+  </div>
+  <div data-role="page" id="V2" class="boyquestion">
+    <div data-role="main" class="ui-content">
+      <div class="qs">
+        <img src="img/soccerball.png">
+        <span class="gscore">0000</span>
+      </div>
+      <br><br>
+      <span class="topic">Verb(Present Tense)</span>
+      <br><br><br>
+      <span class="white">Simple Continous: He is drinking.</span>
+      <br><br>
+      <img src="img/drinkwater.gif">
+      <br><br><br>
+      <span class="white">Simple Continous: He is running.</span>
+      <br>
+      <img src="img/running.gif">
+      <br>
+      <a href="#BQ1"><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored ansbtn">
+          CONTINUE
+        </button></a>
+    </div>
+  </div>
+
+  <!-- HOMEPAGE -->
+  <div data-role="page" id="Khome">
+    <div data-role="main" class="ui-content">
+      <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect" id="learnAlign">
+        <div class="mdl-tabs__tab-bar">
+          <a href="#learning" class="mdl-tabs__tab is-active">LEARNING</a>
+          <a href="#globalactivity" class="mdl-tabs__tab">TEST</a>
+        </div>
+        <div class="mdl-tabs__panel is-active" id="learning">
+          <br><br>
+          <div id="Kred">
+            <div>
+              <!-- Square card -->
+              <div id="K1" class="demo-card-square mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title mdl-card--expand">
+                  <h2 class="mdl-card__title-text">Learn Verbs</h2>
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                  <a href="#V1" id="bvb" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    Launch
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <div id="Kred1">
+            <div>
+              <!-- Square card -->
+              <div id="K2" class="demo-card-square mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title mdl-card--expand">
+                  <h2 class="mdl-card__title-text">Intermediate</h2>
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                  <a href="#VI" id="ivi" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    Launch
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <div id="Kred2">
+            <div>
+              <!-- Square card -->
+              <div id="K3" class="demo-card-square mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title mdl-card--expand">
+                  <h2 class="mdl-card__title-text">Advanced</h2>
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                  <a href="#VA" id="ava" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    Launch
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mdl-tabs__panel" id="globalactivity">
+          <br>
+          <div class="kblue">
+            <!-- Square card -->
+            <div id="K4" class="demo-card-square mdl-card mdl-shadow--2dp">
+              <div class="mdl-card__title mdl-card--expand">
+                <h2 class="mdl-card__title-text">Global Activity</h2>
+              </div>
+              <div class="mdl-card__actions mdl-card--border">
+                <a id="globalbtn" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                  Launch
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="kblue">
+            <!-- Square card -->
+            <div id="K5" class="demo-card-square mdl-card mdl-shadow--2dp">
+              <div class="mdl-card__title mdl-card--expand">
+                <h2 class="mdl-card__title-text">EXAM</h2>
+              </div>
+              <div class="mdl-card__actions mdl-card--border">
+                <a href="#pretest" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                  Launch
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- FOOTER NAV -->
+    <div data-role="footer">
+      <div data-role="navbar">
+        <ul>
+          <li><a href="#home" data-icon="book" class="botnav home1 destroy"></a></li>
+          <li><a href="#Kmenu" data-icon="bar-chart-o" class="botnav stats performance"></a></li>
+          <li><a href="#Kacc" data-icon="user" class="botnav prof destroy" data-transition="pop"></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRETEST QUESTIONS -->
+  <div data-role="page" id="pretest">
+    <div data-role="main" class="ui-content">
+      <div id="Q1">
+        <br><br><br>
+        <span class="questionfont">1.I have </span>
+        <br><br>
+        <form>
+          <fieldset data-role="controlgroup" id="PQ1">
+            <label><input name="radio" type="radio" value="bad"> A. any brothers or sisters</label>
+            <label><input name="radio" type="radio" value="good"> B. no brothers or sisters</label>
+            <label><input name="radio" type="radio" value="bad"> C. some brothers or sisters</label>
+          </fieldset>
+        </form>
+      </div>
+      <div id="Q2">
+        <br><br><br>
+        <span class="questionfont">2.He is ________ water.</span>
+        <br><br>
+        <form>
+          <fieldset data-role="controlgroup" id="PQ2">
+            <label><input name="radio" type="radio" value="bad"> A. drinks</label>
+            <label><input name="radio" type="radio" value="good"> B. drinking</label>
+            <label><input name="radio" type="radio" value="bad"> C. drink</label>
+          </fieldset>
+        </form>
+      </div>
+      <div id="Q3">
+        <br><br><br>
+        <span class="questionfont">3.The boy turns and kicks the ball.</span>
+        <br><br>
+        <form>
+          <fieldset data-role="controlgroup" id="PQ3">
+            <label><input name="radio" type="radio" value="bad"> A. Present Continous</label>
+            <label><input name="radio" type="radio" value="good"> B. Simple Present</label>
+          </fieldset>
+        </form>
+      </div>
+      <div id="Q4">
+        <br><br><br>
+        <span class="questionfont">4.What is the captial of Mauritius?</span>
+        <br><br>
+        <form>
+          <fieldset data-role="controlgroup" id="PQ4">
+            <label><input name="radio" type="radio" value="bad"> A. Triolet</label>
+            <label><input name="radio" type="radio" value="good"> B. Port-Louis</label>
+            <label><input name="radio" type="radio" value="bad"> C. Flacq</label>
+          </fieldset>
+        </form>
+      </div>
+      <div id="Q5">
+        <br><br><br>
+        <span class="questionfont">5.Choose the correct sentence.</span>
+        <br><br>
+        <form>
+          <fieldset data-role="controlgroup" id="PQ5">
+            <label><input name="radio" type="radio" value="bad"> A. Give she the book.</label>
+            <label><input name="radio" type="radio" value="good"> B. Give her the book.</label>
+            <label><input name="radio" type="radio" value="bad"> C. Give I the boy.</label>
+          </fieldset>
+        </form>
+      </div>
+      <div id="Q6">
+        <br><br><br>
+        <span class="questionfont">6.Choose the correct answer below:</span>
+        <br><br>
+        <form>
+          <fieldset data-role="controlgroup" id="PQ6">
+            <label><input name="radio" type="radio" value="bad"> A. I is cold.</label>
+            <label><input name="radio" type="radio" value="good"> B. I am cold.</label>
+            <label><input name="radio" type="radio" value="bad"> C. I has cold</label>
+          </fieldset>
+        </form>
+      </div>
+      <div id="Q7">
+        <br><br><br>
+        <span class="questionfont">7.She works ______ Saturdays.</span>
+        <br><br>
+        <form>
+          <fieldset data-role="controlgroup" id="PQ7">
+            <label><input name="radio" type="radio" value="bad"> A. is</label>
+            <label><input name="radio" type="radio" value="good"> B. on </label>
+            <label><input name="radio" type="radio" value="bad"> C. in</label>
+          </fieldset>
+        </form>
+      </div>
+      <div id="Q8">
+        <br><br><br>
+        <span class="questionfont">8.She is very good ____ making stories.</span>
+        <br><br>
+        <form>
+          <fieldset data-role="controlgroup" id="PQ8">
+            <label><input name="radio" type="radio" value="bad"> A. in</label>
+            <label><input name="radio" type="radio" value="good"> B. at</label>
+            <label><input name="radio" type="radio" value="bad"> C. on</label>
+          </fieldset>
+        </form>
+      </div>
+      <div id="Q9">
+        <br><br><br>
+        <span class="questionfont">9.Pick the present tense sentence.</span>
+        <br><br>
+        <form>
+          <fieldset data-role="controlgroup" id="PQ9">
+            <label><input name="radio" type="radio" value="bad"> A. I had tuna yesterday.</label>
+            <label><input name="radio" type="radio" value="good"> B. I am writing a story currently.</label>
+            <label><input name="radio" type="radio" value="bad"> C. I will be doing your work tomorrow.</label>
+          </fieldset>
+        </form>
+      </div>
+      <div id="Q10">
+        <br><br><br>
+        <span class="questionfont">10.Choose the present tense verb"</span>
+        <br><br>
+        <form>
+          <fieldset data-role="controlgroup" id="PQ10">
+            <label><input name="radio" type="radio" value="bad"> A. Ate</label>
+            <label><input name="radio" type="radio" value="good"> B. eaten </label>
+            <label><input name="radio" type="radio" value="bad"> C. eats</label>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRETEST RESULTS -->
+  <div data-role="page" id="pretestresults">
+    <div data-role="main" class="ui-content">
+      <br><br><br><br><br><br>
+      <span class="results">Your Pretest Results:</span>
+      <br><br>
+      <div id="pretestcontainer"></div>
+      <br><br>
+      <button id="movetomain">Advance</button>
+    </div>
+  </div>
+
+  <!-- APITUDE TEST -->
+  <div data-role="page" id="aptitudetest">
+    <div data-role="main" class="ui-content">
+      <div id="logoaptitude">
+        <img id="iambrain" src="img/brain.png">
+      </div>
+      <div id="apti">
+        <br><br>
+        <input type="text" name="fname" id="fname" placeholder="James Mackarty">
+        <br>
+        <input type="text" name="class" placeholder="grade 7">
+        <br>
+        <input type="text" name="" placeholder="Piton State College">
+        <br>
+        <label for="age" class="apttext">Age:</label>
+        <input type="range" name="age" id="age" value="12" min="9" max="15">
+        <br>
+        <fieldset data-role="controlgroup" id="gender">
+          <div class="apttext">Gender:</div>
+          <label><input name="radio" type="radio" value="boy"> Boy</label>
+          <label><input name="radio" type="radio" value="girl"> Girl</label>
+        </fieldset>
+        <br>
+        <button id="aptsub" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROFILE -->
+  <div data-role="page" id="Kacc">
+    <div data-role="main" class="ui-content" id="Kprofilemain">
+      <a id="Klogout" class="ui-btn ui-shadow ui-corner-all ui-icon-sign-out ui-btn-icon-notext ui-btn-a" href="#Klogin" data-transition="fade"></a>
+      <div id="Kprofileicon">
+        <img src="img/sboy.png">
+        <h4>Vashil Kissoon</h4>
+        <h9>Grade 7 Diamond</h9>
+        <br>
+        <div id="Kproseparator"></div>
+      </div>
+      <br>
+      <br>
+      <br>
+      <div class="ui-grid-c">
+        <div class="ui-block-a"><img src="img/file.png"></div>
+        <div class="ui-block-b"><img src="img/ques.png"></div>
+        <div class="ui-block-c"><img src="img/ques.png"></div>
+        <div class="ui-block-d"><img src="img/ques.png"></div>
+      </div>
+      <div class="ui-grid-c">
+        <div class="ui-block-a"><img src="img/ques.png"></div>
+        <div class="ui-block-b"><img src="img/ques.png"></div>
+        <div class="ui-block-c"><img src="img/ques.png"></div>
+        <div class="ui-block-d"><img src="img/ques.png"></div>
+      </div>
+      <div class="ui-grid-c">
+        <div class="ui-block-a"><img src="img/ques.png"></div>
+        <div class="ui-block-b"><img src="img/ques.png"></div>
+        <div class="ui-block-c"><img src="img/ques.png"></div>
+        <div class="ui-block-d"><img src="img/ques.png"></div>
+      </div>
+      <div class="ui-grid-c">
+        <div class="ui-block-a"><img src="img/ques.png"></div>
+        <div class="ui-block-b"><img src="img/ques.png"></div>
+        <div class="ui-block-c"><img src="img/ques.png"></div>
+        <div class="ui-block-d"><img src="img/ques.png"></div>
+      </div>
+      <div class="ui-grid-c">
+        <div class="ui-block-a"><img src="img/ques.png"></div>
+        <div class="ui-block-b"><img src="img/ques.png"></div>
+        <div class="ui-block-c"><img src="img/ques.png"></div>
+        <div class="ui-block-d"><img src="img/ques.png"></div>
+      </div>
+    </div>
+    <!-- FOOTER NAV -->
+    <div data-role="footer">
+      <div data-role="navbar">
+        <ul>
+          <li><a href="#Khome" data-icon="book" class="botnav home1 destroy" data-transition="slide"></a></li>
+          <li><a id="Kstats" href="#Kmenu" data-icon="bar-chart-o" class="botnav stats performance"></a></li>
+          <li><a data-icon="user" class="botnav prof destroy"></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- MAIN MENU -->
+  <div data-role="page" id="Kmenu">
+    <div data-role="main" class="ui-content">
+      <!-- DIV FOR TITLE -->
+      <div id="Kmenucont">
+        <h4>Overall Performance</h4>
+      </div>
+      <br><br><br>
+      <span class="overallperformance">90%</span>
+      <br><br><br>
+      <!-- PROGRESS BARS -->
+      <div id="Kprogresscont">
+        <h7>Mistakes:</h7>
+        <h8 id="K11"></h8>
+        <div id="container"></div>
+        <h7>Good Answers:</h7>
+        <h8 id="K12"></h8>
+        <div id="container1"></div>
+      </div>
+      <div id="Kseparator"></div>
+      <!-- RANKING -->
+      <div id="Krankingcont">
+        <h4>Ranking</h4>
+        <a id="Krank" class="ui-btn ui-shadow ui-corner-all ui-icon-info ui-btn-icon-notext ui-btn-a" href="#"></a>
+        <dialog class="mdl-dialog">
+          <h4 class="mdl-dialog__title">Ranking</h4>
+          <div class="mdl-dialog__content">
+            <p>
+              The Rank shows the top 5 students in the class with the best average score of all the activies.
+            </p>
+          </div>
+          <div class="mdl-dialog__actions">
+            <button type="button" class="mdl-button close" data-icon="delete">close</button>
+          </div>
+        </dialog>
+        <div id="Kpodium">
+          <img src="img/podium.png">
+          <ul data-role="listview" data-inset="true">
+            <li><img class="ui-li-icon ui-corner-none" src="img/gf.png">Anne Lise</li>
+            <li><img class="ui-li-icon" src="img/gf.png">Yud Hauradhun</li>
+            <li><img class="ui-li-icon" src="img/boy.png">Divesh Mootia</li>
+            <li><img class="ui-li-icon" src="img/gf.png">Priyasha Ramdass</li>
+            <li><img class="ui-li-icon ui-corner-none" src="img/boy.png">Dharma Singh</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- FOOTER NAV -->
+    <div data-role="footer">
+      <div data-role="navbar">
+        <ul>
+          <li><a href="#Khome" data-icon="book" class="botnav home1 destroy" data-transition="slide"></a></li>
+          <li><a data-icon="bar-chart-o" class="botnav stats"></a></li>
+          <li><a href="#Kacc" data-icon="user" class="botnav prof destroy"></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Question FORMAT BOYS -->
+  <div data-role="page" id="BQ1" class="boyquestion">
+    <div data-role="main" class="ui-content">
+      <div class="qs">
+        <img src="img/soccerball.png">
+        <span class="gscore">0000</span>
+      </div>
+      <br><br><br><br>
+      <div class="questions white">
+        Determine the correct tense:
+      </div>
+      <br><br>
+      <img src="img/tenor.gif" class="op">
+      <br><br><br>
+      <p class="qw">The man is moving fast.</p>
+      <form>
+        <fieldset data-role="controlgroup" id="BR1" class="one">
+          <label><input name="radio" type="radio" value="bad">Simple Present</label>
+          <label><input name="radio" type="radio" value="good">Present Continous</label>
+        </fieldset>
+      </form>
+    </div>
+    <div class="leveleasy"></div>
+  </div>
+
+  <!-- GOOD FEEDBACK -->
+  <div data-role="page" id="BR1G" class="boyfeedback">
+    <div data-role="main" class="ui-content center">
+      <div class="qs">
+        <img src="img/soccerball.png">
+        <span class="gscore">0000</span>
+      </div>
+      <br><br><br>
+      <div class="congrats">
+        yeessssss
+      </div>
+      <br>
+      <img src="img/bhappy.png" class="bhappy">
+      <img src="img/plus.png" class="plus">
+      <br><br>
+      <div class="iamfeedback">
+        Very good, indeed your are right the man is moving is the present continous tense.
+      </div>
+    </div>
+    <button id="F1" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored goodfeedbackbutton yolo">
+      ADVANCE
+    </button>
+  </div>
+
+  <!-- BAD FEEDBACK -->
+  <div data-role="page" id="BR1B" class="boyfeedback">
+    <div data-role="main" class="ui-content center">
+      <div class="qs">
+        <img src="img/soccerball.png">
+        <span class="gscore">0000</span>
+      </div>
+      <br><br><br><br>
+      <div class="congrats">
+        NOPE
+      </div>
+      <br>
+      <img src="img/bsad.png" class="gsad">
+
+      <br><br>
+      <div class="iamfeedback">
+        No, the answer is not right. The good answer is present continous tense the man is still moving.
+      </div>
+    </div>
+    <button id="F1" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored badfeedbackbutton yolo">
+      ADVANCE
+    </button>
+  </div>
+
+  <div data-role="page" id="BQ2" class="boyquestion">
+    <div data-role="main" class="ui-content">
+      <div class="qs">
+        <img src="img/soccerball.png">
+        <span class="gscore">0000</span>
+      </div>
+      <br><br><br><br>
+      <div class="questions white">
+        Determine the correct tense:
+      </div>
+      <br><br>
+      <img src="img/babyyell.gif" class="op">
+      <br><br><br>
+      <p class="qw">The baby yells loudly.</p>
+      <form>
+        <fieldset data-role="controlgroup" id="BR2" class="one">
+          <label><input name="radio" type="radio" value="good">Simple Present</label>
+          <label><input name="radio" type="radio" value="bad">Present Continous</label>
+        </fieldset>
+      </form>
+    </div>
+    <div class="leveleasy"></div>
+  </div>
+
+  <!-- GOOD FEEDBACK -->
+  <div data-role="page" id="BR2G" class="boyfeedback">
+    <div data-role="main" class="ui-content center">
+      <div class="qs">
+        <img src="img/soccerball.png">
+        <span class="gscore">0000</span>
+      </div>
+      <br><br><br>
+      <div class="congrats">
+        yeessssss
+      </div>
+      <br>
+      <img src="img/bhappy.png" class="bhappy">
+      <img src="img/plus.png" class="plus">
+      <br><br>
+      <div class="iamfeedback">
+        Very good, indeed your are right yells is in the simple present tense.
+      </div>
+    </div>
+    <button id="F1" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored goodfeedbackbutton yolo">
+      ADVANCE
+    </button>
+  </div>
+
+  <!-- BAD FEEDBACK -->
+  <div data-role="page" id="BR2B" class="boyfeedback">
+    <div data-role="main" class="ui-content center">
+      <div class="qs">
+        <img src="img/soccerball.png">
+        <span class="gscore">0000</span>
+      </div>
+      <br><br><br><br>
+      <div class="congrats">
+        NOPE
+      </div>
+      <br>
+      <img src="img/bsad.png" class="gsad">
+
+      <br><br>
+      <div class="iamfeedback">
+        No, the answer is not right. The baby is not yelling continously as per the sentence it is the simple present; the baby yells.
+      </div>
+    </div>
+    <button id="F1" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored badfeedbackbutton yolo">
+      ADVANCE
+    </button>
+  </div>
+
+  <div data-role="page" id="BQ3" class="boyquestion">
+    <div data-role="main" class="ui-content">
+      <div class="qs">
+        <img src="img/soccerball.png">
+        <span class="gscore">0000</span>
+      </div>
+      <br><br><br><br>
+      <div class="questions white">
+        Determine the correct tense:
+      </div>
+      <br><br>
+      <img src="img/sliddingcar.gif" class="op">
+      <br><br><br>
+      <p class="qw">The car is slidding on the slippery road.</p>
+      <form>
+        <fieldset data-role="controlgroup" id="BR3" class="one">
+          <label><input name="radio" type="radio" value="bad">Simple Present</label>
+          <label><input name="radio" type="radio" value="good">Present Continous</label>
+        </fieldset>
+      </form>
+    </div>
+    <div class="leveleasy"></div>
+  </div>
+
+  <!-- GOOD FEEDBACK -->
+  <div data-role="page" id="BR3G" class="boyfeedback">
+    <div data-role="main" class="ui-content center">
+      <div class="qs">
+        <img src="img/soccerball.png">
+        <span class="gscore">0000</span>
+      </div>
+      <br><br><br>
+      <div class="congrats">
+        yeessssss
+      </div>
+      <br>
+      <img src="img/bhappy.png" class="bhappy">
+      <img src="img/plus.png" class="plus">
+      <br><br>
+      <div class="iamfeedback">
+        Very good, indeed your are right yells is in the present continuous tense.
+      </div>
+    </div>
+    <button id="F1" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored goodfeedbackbutton yolo">
+      ADVANCE
+    </button>
+  </div>
+
+  <!-- BAD FEEDBACK -->
+  <div data-role="page" id="BR3B" class="boyfeedback">
+    <div data-role="main" class="ui-content center">
+      <div class="qs">
+        <img src="img/soccerball.png">
+        <span class="gscore">0000</span>
+      </div>
+      <br><br><br><br>
+      <div class="congrats">
+        NOPE
+      </div>
+      <br>
+      <img src="img/bsad.png" class="gsad">
+
+      <br><br>
+      <div class="iamfeedback">
+        No, the answer is not right. The baby is still slidding as the sentence indicates.
+      </div>
+    </div>
+    <button id="F1" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored badfeedbackbutton yolo">
+      ADVANCE
+    </button>
+  </div>
+
+  <div data-role="page" id="BQ4" class="boyquestion">
+    <div data-role="main" class="ui-content">
+      <div class="qs">
+        <img src="img/soccerball.png">
+        <span class="gscore">0000</span>
+      </div>
+      <br><br><br><br>
+      <div class="questions white">
+        Determine the correct tense:
+      </div>
+      <br><br>
+      <img src="img/soccerkick.gif" class="op">
+      <br><br><br>
+      <p class="qw">The boy turns and kicks the ball in the net.</p>
+      <form>
+        <fieldset data-role="controlgroup" id="BR4" class="one">
+          <label><input name="radio" type="radio" value="good">Simple Present</label>
+          <label><input name="radio" type="radio" value="bad">Present Continous</label>
+        </fieldset>
+      </form>
+    </div>
+    <div class="levelmed"></div>
+  </div>
+
+  <!-- GOOD FEEDBACK -->
+  <div data-role="page" id="BR4G" class="boyfeedback">
+    <div data-role="main" class="ui-content center">
+      <div class="qs">
+        <img src="img/soccerball.png">
+        <span class="gscore">0000</span>
+      </div>
+      <br><br><br>
+      <div class="congrats">
+        yeessssss
+      </div>
+      <br>
+      <img src="img/bhappy.png" class="bhappy">
+      <img src="img/plus.png" class="plus">
+      <br><br>
+      <div class="iamfeedback">
+        Very good, indeed your are right the boy turns, kicks are both in the simple present tense.
+      </div>
+    </div>
+    <button id="F1" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored goodfeedbackbutton yolo">
+      ADVANCE
+    </button>
+  </div>
+
+  <!-- BAD FEEDBACK -->
+  <div data-role="page" id="BR4B" class="boyfeedback">
+    <div data-role="main" class="ui-content center">
+      <div class="qs">
+        <img src="img/soccerball.png">
+        <span class="gscore">0000</span>
+      </div>
+      <br><br><br><br>
+      <div class="congrats">
+        NOPE
+      </div>
+      <br>
+      <img src="img/bsad.png" class="gsad">
+
+      <br><br>
+      <div class="iamfeedback">
+        No, the answer is not right. The boy kicks and turns are both in the simple present tense.
+      </div>
+    </div>
+    <button id="F1" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored badfeedbackbutton yolo">
+      ADVANCE
+    </button>
+  </div>
+
+  <div data-role="page" id="BQ5" class="boyquestion">
+    <div data-role="main" class="ui-content">
+      <div class="qs">
+        <img src="img/soccerball.png">
+        <span class="gscore">0000</span>
+      </div>
+      <br><br><br><br>
+      <div class="questions white">
+        Determine the correct tense:
+      </div>
+      <br><br>
+      <img src="img/robot.gif" class="op">
+      <br><br><br>
+      <p class="qw">The Robot is hitting the car.</p>
+      <form>
+        <fieldset data-role="controlgroup" id="BR5" class="one">
+          <label><input name="radio" type="radio" value="bad">Simple Present</label>
+          <label><input name="radio" type="radio" value="good">Present Continous</label>
+        </fieldset>
+      </form>
+    </div>
+    <div class="levelmed"></div>
+  </div>
+
+  <!-- GOOD FEEDBACK -->
+  <div data-role="page" id="BR5G" class="boyfeedback">
+    <div data-role="main" class="ui-content center">
+      <div class="qs">
+        <img src="img/soccerball.png">
+        <span class="gscore">0000</span>
+      </div>
+      <br><br><br>
+      <div class="congrats">
+        yeessssss
+      </div>
+      <br>
+      <img src="img/bhappy.png" class="bhappy">
+      <img src="img/plus.png" class="plus">
+      <br><br>
+      <div class="iamfeedback">
+        Very good, indeed your are right the is hitting the car is the present continous tense.
+      </div>
+    </div>
+    <button id="F1" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored goodfeedbackbutton yolo">
+      ADVANCE
+    </button>
+  </div>
+
+  <!-- BAD FEEDBACK -->
+  <div data-role="page" id="BR5B" class="boyfeedback">
+    <div data-role="main" class="ui-content center">
+      <div class="qs">
+        <img src="img/soccerball.png">
+        <span class="gscore">0000</span>
+      </div>
+      <br><br><br><br>
+      <div class="congrats">
+        NOPE
+      </div>
+      <br>
+      <img src="img/bsad.png" class="gsad">
+
+      <br><br>
+      <div class="iamfeedback">
+        No, the answer is not right. The robot hits the car is in the present continous.
+      </div>
+    </div>
+    <button id="F1" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored badfeedbackbutton yolo">
+      ADVANCE
+    </button>
+  </div>
+
+  <div data-role="page" id="BQ6" class="boyquestion">
+    <div data-role="main" class="ui-content">
+      <div class="qs">
+        <img src="img/soccerball.png">
+        <span class="gscore">0000</span>
+      </div>
+      <br><br><br><br>
+      <div class="questions white">
+        Select the appropriate verb:
+      </div>
+      <br><br>
+      <img src="img/trying.gif" class="op">
+      <br><br><br>
+      <p class="qw">The man is trying to ____________.</p>
+      <form>
+        <fieldset data-role="controlgroup" id="BR6" class="one">
+          <label><input name="radio" type="radio" value="bad">drinking</label>
+          <label><input name="radio" type="radio" value="good">drink</label>
+        </fieldset>
+      </form>
+    </div>
+    <div class="levelhard"></div>
+  </div>
+
+  <!-- GOOD FEEDBACK -->
+  <div data-role="page" id="BR6G" class="boyfeedback">
+    <div data-role="main" class="ui-content center">
+      <div class="qs">
+        <img src="img/soccerball.png">
+        <span class="gscore">0000</span>
+      </div>
+      <br><br><br>
+      <div class="congrats">
+        yeessssss
+      </div>
+      <br>
+      <img src="img/bhappy.png" class="bhappy">
+      <img src="img/plus.png" class="plus">
+      <br><br>
+      <div class="iamfeedback">
+        Congratulations you have very good!!!
+      </div>
+    </div>
+    <button id="F1" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored goodfeedbackbutton yolo">
+      ADVANCE
+    </button>
+  </div>
+
+  <!-- BAD FEEDBACK -->
+  <div data-role="page" id="BR6B" class="boyfeedback">
+    <div data-role="main" class="ui-content center">
+      <div class="qs">
+        <img src="img/soccerball.png">
+        <span class="gscore">0000</span>
+      </div>
+      <br><br><br><br>
+      <div class="congrats">
+        NOPE
+      </div>
+      <br>
+      <img src="img/bsad.png" class="gsad">
+
+      <br><br>
+      <div class="iamfeedback">
+        This is not the right answer, the coorect answer is 'drink'.
+      </div>
+    </div>
+    <button id="F1" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored badfeedbackbutton yolo">
+      ADVANCE
+    </button>
+  </div>
+
+  <!-- FINAL RESULTS -->
+  <div data-role="page" id="finalresults">
+    <div data-role="main" class="ui-content">
+      <br><br><br>
+      <span class="FR">Final Results</span>
+      <br><br><br>
+      <div id="clicks"></div>
+      <br><br>
+      <div id="qpattern">Log: </div>
+      <br><br>
+      <a href="#Khome"><button id="btnu">Advance</button></a>
+    </div>
+  </div>
+  <script>
+    var pretestgood = 0;
+    var pretestbad = 0;
+    var totalques = 0;
+    var questiongood = 0;
+    var level = 0;
+    var tracker = [];
+    $(document).ready(function() {
+      //creates the database and size
+      db = openDatabase("ETI", "1.0", "Database for Ai", 2 * 1024 * 1024);
+      //ALLOWS execution of all functions
+      db.transaction(function(tx) {
+        //CREATE TABLE STUDENT
+        tx.executeSql('CREATE TABLE stud(name text, goodans int, badans int,total int)');
+        tx.executeSql('CREATE TABLE topics(lv1 int, lv2 int, lv3 int)');
+        tx.executeSql('CREATE TABLE score(sc int)');
+
+      });
+
+      $("#btnu").click(function() {
+        console.log(tracker);
+
+      });
+
+      /*LOGIN FUNCTION*/
+      $("#Kloginbtn").click(function() {
+        var a = $('#klarge').val();
+        var b = $('#klarge1').val();
+        if ((a == 'admin') && (b == 'admin')) {
+          $.mobile.changePage("#aptitudetest", {
+            reverse: false,
+            transition: "slide"
+          });
+          /*ANIMATION FOR APTITUDE PAGE*/
+          setTimeout(function() {
+            $('#iambrain').fadeOut('slow');
+            $('#aptitudetest').css('background', 'linear-gradient(to top left, #ccccff 0%, #6666ff 100%)');
+          }, 1000);
+          setTimeout(function() {
+            $('#apti').fadeIn('slow');
+          }, 1500)
+        }
+      })
+      /*STATS PAGE*/
+      $(".performance").click(function() {
+        //creates the database and size
+        db = openDatabase("ETI", "1.0", "Database for Ai", 2 * 1024 * 1024);
+        //ALLOWS execution of all functions
+        db.transaction(function(tx) {
+          tx.executeSql('SELECT * FROM stud WHERE rowid=1', [], function(tx, result) {
+            let a = result.rows[0].goodans;
+            let b = result.rows[0].badans;
+            let c = result.rows[0].total;
+            animateg1((b / (a + b)), (a / (a + b)));
+            let s = (a / c) * 100;
+            $('.overallperformance').html(s + "%");
+
+          });
+        });
+      })
+      $(".destroy").click(function() {
+        destroyall();
+      })
+      /*BUTTONS AND SEND VALUES TO DB FOR APTITUDE*/
+      $('#aptsub').click(function() {
+        var fullname = $('#fname').val();
+        var gender = $("input[type='radio']:checked").val();
+        $.mobile.changePage("#pretest", {
+          reverse: false,
+          transition: "slide"
+        });
+      })
+      /*general formula for clicking and checking value on pretest*/
+      $('[data-role=controlgroup]').change(function() {
+        totalques++;
+        /*SOUNDS*/
+        var mysound = document.createElement('audio');
+        mysound.setAttribute('src', 'sounds/good.mp3');
+        $.get();
+        var myvoice = document.createElement('audio');
+        myvoice.setAttribute('src', 'sounds/unconvinced.mp3');
+        $.get();
+        myvoice.play();
+        var a = this.getAttribute('id');
+        var y = '#' + a;
+        var x = "#" + a + " input[type='radio']:checked";
+        if (($(x).val()) == 'good') {
+          pretestgood++;
+        } else {
+          pretestbad++;
+        }
+        var arr = ['#Q1', '#Q2', '#Q3', '#Q4', '#Q5', '#Q6', '#Q7', '#Q8', '#Q9', '#Q10'];
+        let i = 1;
+        for (i; i < 10; i++) {
+          if (((y.includes(i) == true)) && (y != '#PQ10')) {
+            setTimeout(function() {
+              let z = i - 1;
+              $(arr[z]).fadeOut('slow').hide();
+              $(arr[i]).fadeIn('slow').show();
+            }, 1200)
+            break;
+          } else if (y == "#PQ10") {
+            setTimeout(function() {
+              $.mobile.changePage("#pretestresults", {
+                reverse: false,
+                transition: "pop"
+              });
+              var percent = (pretestgood / 10);
+              roll(percent);
+              mysound.play();
+            }, 2000)
+            //creates the database and size
+            db = openDatabase("ETI", "1.0", "Database for Ai", 2 * 1024 * 1024);
+            //ALLOWS execution of all functions
+            db.transaction(function(tx) {
+              tx.executeSql('INSERT INTO stud(name, goodans,badans,total) VALUES (?,?,?,?)', ['Vashil Kissoon', pretestgood, pretestbad, totalques]);
+            });
+            break;
+          }
+        }
+      })
+      /*click and go to main*/
+      $("#movetomain").click(function() {
+        $.mobile.changePage("#Khome", {
+          reverse: false,
+          transition: "pop"
+        });
+      })
+
+      //play an audio file that i recorded earlier
+      var myvoice = document.createElement('audio');
+      myvoice.setAttribute('src', 'sounds/applause7.mp3');
+      $.get();
+      var myvoice1 = document.createElement('audio');
+      myvoice1.setAttribute('src', 'sounds/sadtrump.mp3');
+      $.get();
+      var myvar;
+      var ans = "good";
+      $(".one").change(function() {
+        var a = this.getAttribute('id');
+        let b = "#" + a + " input[type='radio']:checked";
+        let ans = $(b).val();
+        if (ans == 'good') {
+          level += 21;
+          let c = "#" + a + "G";
+          $.mobile.changePage(c, {
+            reverse: false,
+            transition: "pop"
+          });
+          let x = "#" + a;
+          $(x + " input[type='radio']").attr('checked', false);
+          questiongood++;
+          myvoice.play();
+          setTimeout(function() {
+            myvar = setInterval(mytimer, 30);
+          }, 800)
+        } else {
+          if (level != 0) {
+            level -= 21
+          }
+          let c = "#" + a + "B";
+          $.mobile.changePage(c, {
+            reverse: false,
+            transition: "pop"
+          });
+          let x = "#" + a;
+          $(x + " input[type='radio']").attr('checked', false);
+          myvoice1.play();
+        }
+      })
+      var a = 50;
+
+      function mytimer() {
+        $('.plus').show();
+        var b = a + '%';
+        $('.plus').css('width', b)
+        a -= 2;
+        if (a < 1) {
+          clearInterval(myvar);
+          var x = $('.gscore').html();
+          let y = parseInt(x);
+          y += 10;
+          $('.gscore').html(y);
+          $('.plus').hide();
+          a = 50;
+        }
+      }
+
+      $(".yolo").click(function() {
+        generatenew();
+      })
+    });
+
+    function generatenew() {
+      var myarr = ['#BQ1', '#BQ2', '#BQ3', '#BQ4', '#BQ5', '#BQ6'];
+      if ((level >= 0) && (level < 40)) {
+        let a = Math.round(Math.random(3));
+        $.mobile.changePage(myarr[a], {
+          reverse: false,
+          transition: "pop"
+        });
+        tracker.push("1");
+      } else if ((level > 40) && (level < 81)) {
+        let i = Math.round(Math.random(3)) + 3;
+        $.mobile.changePage(myarr[i], {
+          reverse: false,
+          transition: "pop"
+        });
+        tracker.push("2");
+      } else if ((level > 81) && (level < 100)) {
+        $.mobile.changePage(myarr[5], {
+          reverse: false,
+          transition: "pop"
+        });
+        tracker.push("3");
+      } else {
+        tracker.push("3");
+        //creates the database and size
+        db = openDatabase("ETI", "1.0", "Database for Ai", 2 * 1024 * 1024);
+        //ALLOWS execution of all functions
+        db.transaction(function(tx) {
+          tx.executeSql('INSERT INTO score(sc) values(?)', [questiongood]);
+        });
+        $.mobile.changePage("#finalresults", {
+          reverse: false,
+          transition: "pop"
+        });
+        let r = tracker.length;
+        $("#clicks").html("User made " + r + " clicks.");
+        for (let i = 0; i < tracker.length; i++) {
+          $("#qpattern").append(tracker[i] + ", ");
+        }
+      }
+    }
+    //ANIMATE CIRCLE
+    function roll(x) {
+      var bar = new ProgressBar.Circle(pretestcontainer, {
+        color: '#aaa',
+        // This has to be the same size as the maximum width to
+        // prevent clipping
+        strokeWidth: 3,
+        trailWidth: 1,
+        easing: 'easeInOut',
+        duration: 1400,
+        text: {
+          autoStyleContainer: false
+        },
+        from: {
+          color: '#F00030',
+          width: 1
+        },
+        to: {
+          color: '#8ED47D',
+          width: 2
+        },
+        // Set default step function for all animate calls
+        step: function(state, circle) {
+          circle.path.setAttribute('stroke', state.color);
+          circle.path.setAttribute('stroke-width', state.width);
+
+          var value = Math.round(circle.value() * 100);
+          if (value === 0) {
+            circle.setText('');
+          } else {
+            circle.setText(value + '%');
+          }
+
+        }
+      });
+      bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
+      bar.text.style.fontSize = '2rem';
+
+      bar.animate(x); // Number from 0.0 to 1.0
+    }
+
+    /*ARRAY FOR GRAPH*/
+    var progressBars = [];
+
+    function animateg1(game1, game2) {
+      progressBars[0] = (new ProgressBar.Line(container, {
+        strokeWidth: 4,
+        easing: 'easeInOut',
+        duration: 1400,
+        color: '#FFEA82',
+        trailColor: '#eee',
+        trailWidth: 1,
+        svgStyle: {
+          width: '100%',
+          height: '100%'
+        },
+        from: {
+          color: '#B8E34A'
+        },
+        to: {
+          color: '#F0003C'
+        },
+        step: (state, bar) => {
+          bar.path.setAttribute('stroke', state.color);
+        }
+      }));
+      progressBars[1] = (new ProgressBar.Line(container1, {
+        strokeWidth: 4,
+        easing: 'easeInOut',
+        duration: 1400,
+        color: '#FFEA82',
+        trailColor: '#eee',
+        trailWidth: 1,
+        svgStyle: {
+          width: '100%',
+          height: '100%'
+        },
+        from: {
+          color: '#FFEC3D'
+        },
+        to: {
+          color: '#84E246'
+        },
+        step: (state, bar) => {
+          bar.path.setAttribute('stroke', state.color);
+        }
+      }));
+      //ANIMATE SECTION
+      var i;
+      var a = [game1, game2];
+      for (i = 0; i < 2; i++) {
+        progressBars[i].animate(a[i]); // Number from 0.0 to 1.0
+      }
+    }
+
+    function destroyall() {
+      var i;
+      progressBars.forEach(function(bar) {
+        bar.destroy();
+      });
+      progressBars = [];
+    }
+  </script>
+</body>
+
+</html>
